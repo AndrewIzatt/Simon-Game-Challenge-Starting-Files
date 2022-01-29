@@ -28,6 +28,12 @@ const playSound = (soundName) => {
     audio.play();
 };
 
+const animatePress = (currentColor) => {
+    pressedButton = document.querySelector(`#${currentColor}`);
+    pressedButton.classList.add("pressed");
+    setTimeout( () => pressedButton.classList.remove("pressed"), 100);
+};
+
 const nextSequence = () => {
     const randomNumber = Math.floor(Math.random() * 4);
     let randomChosenColor = buttonColors[randomNumber];
@@ -42,24 +48,19 @@ const nextSequence = () => {
     playSound(randomChosenColor);
     //adds effect and then hides it in 100 ms
     chosenColor.classList.add("hide");
-    setTimeout(() => chosenColor.classList.remove("hide"), 100)
+    setTimeout(() => chosenColor.classList.remove("hide"), 100);
 };
 
-// buttonList.forEach(function(button) {
-//     button.addEventListener("click", () => {
-//         console.log(button);
-//         userChosenColor = button.getAttribute("id");
-//         console.log(userChosenColor);
-//         userClickedPattern.push(userChosenColor);
-//         console.log(userClickedPattern);
-//     })
-// });
-
-// Why is this returning blue if I leave off 'let'?
+// Why is this returning blue if I leave off 'let'? Question for Devin.
 for (let button of buttonList) {
     button.addEventListener("click", () => {
+        buttonID = button.getAttribute("id");
+        console.log(buttonID);
         // console.log(button.getAttribute("id"));
-        playSound(button.getAttribute("id"));
+        // console.log("The pressed button inside loop is: ");
+        // console.log(button);
+        playSound(buttonID);
+        animatePress(buttonID);
     });
 }
     
